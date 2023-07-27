@@ -8,6 +8,6 @@ data object DebtSplittingStrategy {
     fun splitEqually(payment: Payment, borrowedParties: List<Party>): DebtSplit {
         val amountPerBorrowedParty = payment.amount / borrowedParties.size
         val partyDebt = borrowedParties.associateWith { amountPerBorrowedParty }
-        return BalancedDebtSplit(payment, PartyDebt(partyDebt))
+        return BalancedDebtSplit(payment.ownedParty, PartyDebt(partyDebt))
     }
 }
