@@ -27,9 +27,9 @@ class EqualDebtSplittingStrategyTest {
         assertEquals(expectedPartyDebt, debtSplitResult.partyDebt())
     }
 
-    private fun assertPayment(payment: Payment, debtSplitResult: DebtSplit) {
-        assertAmountOwned(payment.amount, debtSplitResult)
-        assertOwnedParty(payment.ownedParty, debtSplitResult)
+    private fun assertPayment(expectedPayment: Payment, debtSplitResult: DebtSplit) {
+        assertAmountOwned(expectedPayment.amount, debtSplitResult)
+        assertOwnedParty(expectedPayment.ownedParty, debtSplitResult)
     }
 
     private fun assertOwnedParty(expectedOwnedParty: Party, debtSplitResult: DebtSplit) {
