@@ -2,6 +2,7 @@ package debtsplitter.debtSplit
 
 import debtsplitter.payment.Payment
 import debtsplitter.party.Party
+import debtsplitter.partyDebt.PartyDebt
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -11,8 +12,8 @@ class EqualDebtSplittingStrategyTest {
         val ownedParty = Party("1")
         val amount = 10.0
         val payment = Payment(ownedParty, amount)
-        val partyDebt = mapOf(Party("2") to 5.0, Party("3") to 5.0)
-        val parties = partyDebt.keys.toList()
+        val partyDebt = PartyDebt(mapOf(Party("2") to 5.0, Party("3") to 5.0))
+        val parties = partyDebt.partyDebt.keys.toList()
         val debtSplitResult = DebtSplittingStrategy.splitEqually(payment, parties)
         assertResultIsBalancedDebtSplit(debtSplitResult)
         assertPayment(payment, debtSplitResult)
@@ -21,11 +22,11 @@ class EqualDebtSplittingStrategyTest {
     }
 
     private fun assertPaymentAmountIsSplitAccordingly(payment: Payment, debtSplitResult: DebtSplit) {
-        assertEquals(payment.amount, debtSplitResult.partyDebt().values.sum())
+        assertEquals(payment.amount, debtSplitResult.partyDebt().amount())
     }
 
     private fun assertPartyDebt(
-        expectedPartyDebt: Map<Party, Double>,
+        expectedPartyDebt: PartyDebt,
         debtSplitResult: DebtSplit
     ) {
         assertEquals(expectedPartyDebt, debtSplitResult.partyDebt())
