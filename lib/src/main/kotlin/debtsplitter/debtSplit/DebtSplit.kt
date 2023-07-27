@@ -1,3 +1,8 @@
 package debtsplitter.debtSplit
 
-sealed interface DebtSplit
+import debtsplitter.party.Party
+
+sealed interface DebtSplit {
+    fun amountOwned(): Double
+    fun ownedParty(): Party
+}
