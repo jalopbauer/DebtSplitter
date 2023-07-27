@@ -1,5 +1,6 @@
 package debtsplitter.debtSplit
 
+import debtsplitter.amount.MoneyAmount
 import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
@@ -12,11 +13,11 @@ class EqualDebtSplittingStrategyTest {
         val debtSplittingStrategyTestInputs = listOf(
             DebtSplittingStrategyTestInput(
                 "Testing number juan",
-                Payment(Party("1"), 10.0),
+                Payment(Party("1"), MoneyAmount(10.0)),
                 PartyDebt(
                     mapOf(
-                        Party("2") to 5.0,
-                        Party("3") to 5.0
+                        Party("2") to MoneyAmount(5.0),
+                        Party("3") to MoneyAmount(5.0)
                     )
                 )
             )
@@ -48,7 +49,7 @@ class EqualDebtSplittingStrategyTest {
     }
 
     private fun assertPayment(expectedPayment: Payment, debtSplitResult: DebtSplit) {
-        assertAmountOwned(expectedPayment.amount, debtSplitResult)
+        assertAmountOwned(expectedPayment.amount.amount, debtSplitResult)
         assertOwnedParty(expectedPayment.ownedParty, debtSplitResult)
     }
 
