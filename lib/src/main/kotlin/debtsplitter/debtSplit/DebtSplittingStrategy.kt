@@ -5,6 +5,8 @@ import debtsplitter.party.Party
 
 data object DebtSplittingStrategy {
     fun splitEqually(payment: Payment, borrowedParties: List<Party>): DebtSplit {
-        return BalancedDebtSplit(payment)
+        val amountPerBorrowedParty = payment.amount / borrowedParties.size
+        val partyDebt = borrowedParties.associateWith { amountPerBorrowedParty }
+        return BalancedDebtSplit(payment, partyDebt)
     }
 }
