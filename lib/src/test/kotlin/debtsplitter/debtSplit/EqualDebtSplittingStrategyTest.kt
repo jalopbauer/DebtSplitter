@@ -59,7 +59,7 @@ class EqualDebtSplittingStrategyTest {
 
     private fun assertAmountOwned(expectedAmount: Double, debtSplit: DebtSplit) {
         val actualAmountOwned = debtSplit.amountOwned()
-        assertEquals(expectedAmount, actualAmountOwned)
+        assertEquals(expectedAmount, actualAmountOwned.amount)
     }
 
     private fun assertResultIsBalancedDebtSplit(result: DebtSplit) {
