@@ -9,16 +9,36 @@ import kotlin.test.assertEquals
 class EqualDebtSplittingStrategyTest {
     @Test
     fun shouldSplitPaymentEquallyBetweenParties() {
-        val ownedParty = Party("1")
-        val amount = 10.0
-        val payment = Payment(ownedParty, amount)
-        val partyDebt = PartyDebt(mapOf(Party("2") to 5.0, Party("3") to 5.0))
-        val parties = partyDebt.partyDebt.keys.toList()
-        val debtSplitResult = DebtSplittingStrategy.splitEqually(payment, parties)
+        val debtSplittingStrategyTestInputs = listOf(
+            DebtSplittingStrategyTestInput(
+                "Testing number juan",
+                Payment(Party("1"), 10.0),
+                PartyDebt(
+                    mapOf(
+                        Party("2") to 5.0,
+                        Party("3") to 5.0
+                    )
+                )
+            )
+        )
+        debtSplittingStrategyTestInputs.forEach { debtSplittingStrategyTestInput ->
+            debtSplittingTest(debtSplittingStrategyTestInput)
+        }
+    }
+
+    private fun debtSplittingTest(debtSplittingStrategyTestInput: DebtSplittingStrategyTestInput) {
+        val (testName, payment, partyDebt, parties) = debtSplittingStrategyTestInput
+        println(testName)
+        val debtSplitResult = debtSplit(payment, parties)
         assertResultIsBalancedDebtSplit(debtSplitResult)
         assertPayment(payment, debtSplitResult)
         assertPartyDebt(partyDebt, debtSplitResult)
     }
+
+    private fun debtSplit(
+        payment: Payment,
+        parties: List<Party>
+    ) = DebtSplittingStrategy.splitEqually(payment, parties)
 
     private fun assertPartyDebt(
         expectedPartyDebt: PartyDebt,
