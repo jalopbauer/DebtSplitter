@@ -1,6 +1,5 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
 
