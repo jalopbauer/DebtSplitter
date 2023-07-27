@@ -17,13 +17,14 @@ class EqualDebtSplittingStrategyTest {
         assertResultIsBalancedDebtSplit(debtSplitResult)
         assertPayment(payment, debtSplitResult)
         assertPartyDebt(partyDebt, debtSplitResult)
+
     }
 
     private fun assertPartyDebt(
-        partyDebt: Map<Party, Double>,
+        expectedPartyDebt: Map<Party, Double>,
         debtSplitResult: DebtSplit
     ) {
-        assertEquals(partyDebt, debtSplitResult.partyDebt())
+        assertEquals(expectedPartyDebt, debtSplitResult.partyDebt())
     }
 
     private fun assertPayment(payment: Payment, debtSplitResult: DebtSplit) {
