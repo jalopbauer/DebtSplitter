@@ -1,4 +1,4 @@
-package debtsplitter.debt
+package debtsplitter.payment
 
 import debtsplitter.party.Party
 

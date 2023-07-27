@@ -1,6 +1,6 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.debt.Payment
+import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 
 data class BalancedDebtSplit(val dept: Payment) : DebtSplit {

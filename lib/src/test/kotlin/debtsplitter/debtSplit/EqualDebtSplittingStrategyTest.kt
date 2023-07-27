@@ -1,6 +1,6 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.debt.Payment
+import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
