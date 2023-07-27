@@ -1,9 +1,9 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.debt.Debt
+import debtsplitter.debt.Payment
 import debtsplitter.party.Party
 
-data class BalancedDebtSplit(val dept: Debt) : DebtSplit {
+data class BalancedDebtSplit(val dept: Payment) : DebtSplit {
     override fun amountOwned(): Double =
         dept.amount
 
