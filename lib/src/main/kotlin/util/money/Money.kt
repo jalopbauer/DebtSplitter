@@ -18,27 +18,28 @@ data class Money(val whole: ULong, val decimal: UByte) {
         return Money(whole.plus(money.whole).plus(carry), decimalRes)
     }
 
-    fun fromDouble(double: Double): Money {
-        val doubleString = double.toString()
-        val (valuesBeforeDot, valuesAfterDot) = doubleString
-            .fold(Triple("", "", false)) {
-                    (valuesBeforeDot, valuesAfterDot, hasDotAppeared), c ->
-                when (c) {
-                    '.' -> Triple(valuesBeforeDot, valuesAfterDot, true)
-                    else ->
-                        if (hasDotAppeared) {
-                            if (valuesBeforeDot.length >= 2) {
-                                Triple(valuesBeforeDot, valuesAfterDot, hasDotAppeared)
-                            } else {
-                                Triple(valuesBeforeDot, valuesAfterDot + c, hasDotAppeared)
-
+    companion object {
+        fun fromDouble(double: Double): Money {
+            val doubleString = double.toString()
+            val (valuesBeforeDot, valuesAfterDot) = doubleString
+                .fold(Triple("", "", false)) {
+                        (valuesBeforeDot, valuesAfterDot, hasDotAppeared), c ->
+                    when (c) {
+                        '.' -> Triple(valuesBeforeDot, valuesAfterDot, true)
+                        else ->
+                            if (hasDotAppeared) {
+                                if (valuesAfterDot.length >= 2) {
+                                    Triple(valuesBeforeDot, valuesAfterDot, hasDotAppeared)
+                                } else {
+                                    Triple(valuesBeforeDot, valuesAfterDot + c, hasDotAppeared)
+                                }
+                            } else{
+                                Triple(valuesBeforeDot + c, valuesAfterDot, hasDotAppeared)
                             }
-                        } else{
-                            Triple(valuesBeforeDot + c, valuesAfterDot, hasDotAppeared)
-                        }
-                }
+                    }
 
-            }
-        return Money(valuesBeforeDot.toULong(), valuesAfterDot.toUByte())
+                }
+            return Money(valuesBeforeDot.toULong(), valuesAfterDot.toUByte())
+        }
     }
 }
