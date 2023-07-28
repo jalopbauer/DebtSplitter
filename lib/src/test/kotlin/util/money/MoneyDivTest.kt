@@ -58,6 +58,24 @@ class MoneyDivTest {
         divTest(pair)
     }
 
+    @Test
+    fun remainder() {
+        val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
+            // 0.01 / 2 = 0.0 1
+            Triple(0u, 1u, 2u), Triple(0u, 0u, 1u)
+        )
+        divTest(pair)
+    }
+
+    @Test
+    fun remainderDecimalCarry() {
+        val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
+            // 0.31 / 2 = 0.15 1
+            Triple(0u, 31u, 2u), Triple(0u, 15u, 1u)
+        )
+        divTest(pair)
+    }
+
 
     private fun divTest(pair: Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>) {
         val (input, output) = pair
