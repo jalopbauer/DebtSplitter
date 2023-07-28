@@ -20,6 +20,18 @@ class EqualDebtSplittingStrategyTest {
                         Party("3") to MoneyAmount(5.0)
                     )
                 )
+            ),
+            DebtSplittingStrategyTestInput(
+                "Testing number two",
+                Payment(Party("1"), MoneyAmount(10.0)),
+                PartyDebt(
+                    mapOf(
+                        Party("2") to MoneyAmount(3.34),
+                        Party("3") to MoneyAmount(3.33),
+                        Party("4") to MoneyAmount(3.33),
+                    )
+                )
+
             )
         )
         debtSplittingStrategyTestInputs.forEach { debtSplittingStrategyTestInput ->
