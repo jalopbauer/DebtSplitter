@@ -35,8 +35,8 @@ class MoneyDivTest {
     @Test
     fun wholeCarry() {
         val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
-            // 3.0 / 2 = 1.5 0
-            Triple(3u, 0u, 2u), Triple(1u, 5u, 0u)
+            // 3.0 / 2 = 1.50 0
+            Triple(3u, 0u, 2u), Triple(1u, 50u, 0u)
         )
         divTest(pair)
     }
