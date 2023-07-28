@@ -40,6 +40,14 @@ class MoneyDivTest {
         )
         divTest(pair)
     }
+    @Test
+    fun decimalCarry() {
+        val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
+            // 0.30 / 2 = 0.15 0
+            Triple(0u, 30u, 2u), Triple(0u, 15u, 0u)
+        )
+        divTest(pair)
+    }
 
 
     private fun divTest(pair: Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>) {
