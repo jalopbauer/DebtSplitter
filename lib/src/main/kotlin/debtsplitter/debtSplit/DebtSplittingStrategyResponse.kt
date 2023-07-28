@@ -1,0 +1,3 @@
+package debtsplitter.debtSplit
+
+sealed interface DebtSplittingStrategyResponse

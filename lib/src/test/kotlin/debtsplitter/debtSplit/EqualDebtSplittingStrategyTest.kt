@@ -57,8 +57,12 @@ class EqualDebtSplittingStrategyTest {
         println(testName)
         val debtSplitResult = debtSplit(payment, parties)
         assertResultIsBalancedDebtSplit(debtSplitResult)
-        assertPayment(payment, debtSplitResult)
-        assertPartyDebt(partyDebt, debtSplitResult)
+        when (debtSplitResult) {
+            is DebtSplit -> {
+                assertPayment(payment, debtSplitResult)
+                assertPartyDebt(partyDebt, debtSplitResult)
+            }
+        }
     }
 
     private fun debtSplit(
@@ -87,7 +91,7 @@ class EqualDebtSplittingStrategyTest {
         assertEquals(expectedAmount, actualAmountOwned.amount)
     }
 
-    private fun assertResultIsBalancedDebtSplit(result: DebtSplit) {
+    private fun assertResultIsBalancedDebtSplit(result: DebtSplittingStrategyResponse) {
         assert(result is BalancedDebtSplit)
     }
 }
