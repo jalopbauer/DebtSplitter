@@ -12,7 +12,7 @@ class EqualDebtSplittingStrategyTest {
     fun shouldSplitPaymentEquallyBetweenParties() {
         val debtSplittingStrategyTestInputs = listOf(
             DebtSplittingStrategyTestInput(
-                "Testing number juan",
+                "Testing splitting number by ",
                 Payment(Party("1"), MoneyAmount(10.0)),
                 PartyDebt(
                     mapOf(
@@ -31,7 +31,20 @@ class EqualDebtSplittingStrategyTest {
                         Party("4") to MoneyAmount(3.33),
                     )
                 )
-
+            ),
+            DebtSplittingStrategyTestInput(
+                "Testing number three",
+                Payment(Party("1"), MoneyAmount(10.0)),
+                PartyDebt(
+                    mapOf(
+                        Party("2") to MoneyAmount( 1.67),
+                        Party("3") to MoneyAmount( 1.67),
+                        Party("4") to MoneyAmount( 1.67),
+                        Party("5") to MoneyAmount( 1.67),
+                        Party("6") to MoneyAmount( 1.66),
+                        Party("7") to MoneyAmount( 1.66)
+                    )
+                )
             )
         )
         debtSplittingStrategyTestInputs.forEach { debtSplittingStrategyTestInput ->
