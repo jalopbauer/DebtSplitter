@@ -1,11 +1,11 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
+import util.money.Money
 
 data class BalancedDebtSplit(val ownedParty: Party, val partyDebt : PartyDebt) : DebtSplit {
-    override fun amountOwned(): MoneyAmount =
+    override fun amountOwned(): Money =
         partyDebt.amount()
 
     override fun ownedParty(): Party =

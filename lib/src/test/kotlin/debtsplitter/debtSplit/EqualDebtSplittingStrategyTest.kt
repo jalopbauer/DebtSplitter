@@ -1,10 +1,10 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
 import org.junit.jupiter.api.Test
+import util.money.Money
 import kotlin.test.assertEquals
 
 class EqualDebtSplittingStrategyTest {
@@ -13,36 +13,36 @@ class EqualDebtSplittingStrategyTest {
         val debtSplittingStrategyTestInputs = listOf(
             DebtSplittingStrategyTestInput(
                 "Testing splitting number by ",
-                Payment(Party("1"), MoneyAmount(10.0)),
+                Payment(Party("1"), Money.fromDouble(10.0)),
                 PartyDebt(
                     mapOf(
-                        Party("2") to MoneyAmount(5.0),
-                        Party("3") to MoneyAmount(5.0)
+                        Party("2") to Money.fromDouble(5.0),
+                        Party("3") to Money.fromDouble(5.0)
                     )
                 )
             ),
             DebtSplittingStrategyTestInput(
                 "Testing number two",
-                Payment(Party("1"), MoneyAmount(10.0)),
+                Payment(Party("1"), Money.fromDouble(10.0)),
                 PartyDebt(
                     mapOf(
-                        Party("2") to MoneyAmount(3.34),
-                        Party("3") to MoneyAmount(3.33),
-                        Party("4") to MoneyAmount(3.33),
+                        Party("2") to Money.fromDouble(3.34),
+                        Party("3") to Money.fromDouble(3.33),
+                        Party("4") to Money.fromDouble(3.33),
                     )
                 )
             ),
             DebtSplittingStrategyTestInput(
                 "Testing number three",
-                Payment(Party("1"), MoneyAmount(10.0)),
+                Payment(Party("1"), Money.fromDouble(10.0)),
                 PartyDebt(
                     mapOf(
-                        Party("2") to MoneyAmount( 1.67),
-                        Party("3") to MoneyAmount( 1.67),
-                        Party("4") to MoneyAmount( 1.67),
-                        Party("5") to MoneyAmount( 1.67),
-                        Party("6") to MoneyAmount( 1.66),
-                        Party("7") to MoneyAmount( 1.66)
+                        Party("2") to Money.fromDouble( 1.67),
+                        Party("3") to Money.fromDouble( 1.67),
+                        Party("4") to Money.fromDouble( 1.67),
+                        Party("5") to Money.fromDouble( 1.67),
+                        Party("6") to Money.fromDouble( 1.66),
+                        Party("7") to Money.fromDouble( 1.66)
                     )
                 )
             )
@@ -78,7 +78,7 @@ class EqualDebtSplittingStrategyTest {
     }
 
     private fun assertPayment(expectedPayment: Payment, debtSplitResult: DebtSplit) {
-        assertAmountOwned(expectedPayment.amount.amount, debtSplitResult)
+        assertAmountOwned(expectedPayment.amount, debtSplitResult)
         assertOwnedParty(expectedPayment.ownedParty, debtSplitResult)
     }
 
@@ -86,9 +86,9 @@ class EqualDebtSplittingStrategyTest {
         assertEquals(expectedOwnedParty, debtSplitResult.ownedParty())
     }
 
-    private fun assertAmountOwned(expectedAmount: Double, debtSplit: DebtSplit) {
+    private fun assertAmountOwned(expectedAmount: Money, debtSplit: DebtSplit) {
         val actualAmountOwned = debtSplit.amountOwned()
-        assertEquals(expectedAmount, actualAmountOwned.amount)
+        assertEquals(expectedAmount, actualAmountOwned)
     }
 
     private fun assertResultIsBalancedDebtSplit(result: DebtSplittingStrategyResponse) {

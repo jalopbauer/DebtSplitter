@@ -1,11 +1,11 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
+import util.money.Money
 
 sealed interface DebtSplit : DebtSplittingStrategyResponse {
-    fun amountOwned(): MoneyAmount
+    fun amountOwned(): Money
     fun ownedParty(): Party
     fun partyDebt() : PartyDebt
 }

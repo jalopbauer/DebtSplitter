@@ -1,6 +1,6 @@
 package debtsplitter.payment
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.party.Party
+import util.money.Money
 
-data class Payment(val ownedParty: Party, val amount: MoneyAmount)
+data class Payment(val ownedParty: Party, val amount: Money)

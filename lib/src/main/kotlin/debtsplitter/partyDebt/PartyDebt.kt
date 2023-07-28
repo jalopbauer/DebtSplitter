@@ -1,9 +1,9 @@
 package debtsplitter.partyDebt
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.party.Party
+import util.money.Money
 
-data class PartyDebt(val partyDebt: Map<Party, MoneyAmount>) {
-    fun amount() : MoneyAmount =
-        MoneyAmount(partyDebt.values.sumOf { it.amount })
+data class PartyDebt(val partyDebt: Map<Party, Money>) {
+    fun amount() : Money =
+        partyDebt.values.reduce { acc, money ->  acc.plus(money) }
 }

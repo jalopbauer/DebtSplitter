@@ -1,23 +1,22 @@
 package debtsplitter.debtSplit
 
-import debtsplitter.amount.MoneyAmount
 import debtsplitter.payment.Payment
 import debtsplitter.party.Party
 import debtsplitter.partyDebt.PartyDebt
+import util.money.Money
 
 data object DebtSplittingStrategy {
     fun splitEqually(payment: Payment, borrowedParties: List<Party>): DebtSplittingStrategyResponse {
-        val amountPerBorrowedParty = MoneyAmount(payment.amount.amount / borrowedParties.size).amount
-        val restPerBorrowedParty = (payment.amount.amount % borrowedParties.size).toInt()
+        val (amountPerBorrowedParty, restPerBorrowedParty) = payment.amount.div(borrowedParties.size.toULong())
         val valuesOfEachParty = valuesOfEachParty(restPerBorrowedParty, amountPerBorrowedParty, borrowedParties)
         val partyDebt = borrowedParties.zip(valuesOfEachParty).toMap()
         return BalancedDebtSplit(payment.ownedParty, PartyDebt(partyDebt))
     }
 
     private fun valuesOfEachParty(
-        restPerBorrowedParty: Int,
-        amountPerBorrowedParty: Double,
+        restPerBorrowedParty: ULong,
+        amountPerBorrowedParty: Money,
         borrowedParties: List<Party>
-    ) = (0 until restPerBorrowedParty).map { MoneyAmount(amountPerBorrowedParty + 0.01) } +
-            (restPerBorrowedParty until borrowedParties.size).map { MoneyAmount(amountPerBorrowedParty) }
+    ) = (0 until restPerBorrowedParty.toLong()).map {amountPerBorrowedParty.plus(Money(0u,1u)) } +
+            (restPerBorrowedParty until borrowedParties.size.toULong()).map { amountPerBorrowedParty }
 }
