@@ -5,10 +5,8 @@ import kotlin.test.assertEquals
 
 class MoneyDivTest {
 
-
-    // 2.0 / 2 = 1.0 0
     @Test
-    fun wholeNoDecimalNoCarry() {
+    fun whole() {
         val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
             // 2.0 / 2 = 1.0 0
             Triple(2u, 0u, 2u), Triple(1u, 0u, 0u)
@@ -17,7 +15,7 @@ class MoneyDivTest {
     }
 
     @Test
-    fun noWholeDecimalNoCarry() {
+    fun decimal() {
         val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
             // 0.2 / 2 = 0.1 0
             Triple(0u, 2u, 2u), Triple(0u, 1u, 0u)
@@ -26,7 +24,7 @@ class MoneyDivTest {
     }
 
     @Test
-    fun wholeDecimalNoCarry() {
+    fun wholeDecimal() {
         val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
             // 2.2 / 2 = 1.1 0
             Triple(2u, 2u, 2u), Triple(1u, 1u, 0u)
