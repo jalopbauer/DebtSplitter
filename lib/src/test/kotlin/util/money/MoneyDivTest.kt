@@ -76,7 +76,23 @@ class MoneyDivTest {
         divTest(pair)
     }
 
+    @Test
+    fun remainderIsOneWholeCarry() {
+        val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
+            // 10.0 / 3 = 3.33 1
+            Triple(10u, 0u, 3u), Triple(3u, 33u, 1u)
+        )
+        divTest(pair)
+    }
 
+    @Test
+    fun remainderIsFourWholeCarry() {
+        val pair = Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>(
+            // 10.0 / 6 = 1.66 4
+            Triple(10u, 0u, 6u), Triple(1u, 66u, 4u)
+        )
+        divTest(pair)
+    }
     private fun divTest(pair: Pair<Triple<ULong, UByte, ULong>, Triple<ULong, UByte, ULong>>) {
         val (input, output) = pair
         val (whole, decimal, n) = input
